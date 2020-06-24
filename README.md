@@ -21,5 +21,43 @@ Install MySQL database
 ```sh
 apt-get install -y mysql-server mysql-client
 ```
+# 3. Start Database Service
+Start the database service
+```sh
+service mysql start
+```
+Create database and database users
+```sh
+# mysql -u <username> -p
 
+mysql> CREATE DATABASE employee_db;
+mysql> GRANT ALL ON *.* to db_user@'%' IDENTIFIED BY 'Passw0rd';
+mysql> USE employee_db;
+mysql> CREATE TABLE employees (name VARCHAR(20))
+```
+Insert some test data
+```sh
+mysql> INSERT INTO employees VALUES ('JOHN');
+```
+# 4. Install and Configure Web Server
+Install Python Flask dependency
+```sh
+pip install flask
+pip install flask-mysql
+```
+Copy app.py or download it from source repository
+Configure database credentials and parameters
+
+# 5. Start Web Server
+Start web server
+```sh
+FLASK_APP=app.py flask run --host=0.0.0.0
+```
+# 6. Test
+Open a browser and go to URL
+```sh
+http://<IP>:5000                            => Welcome
+http://<IP>:5000/how%20are%20you            => I am good, how about you?
+http://<IP>:5000/read%20from%20database     => JOHN
+```
 
